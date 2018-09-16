@@ -1,0 +1,35 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add mocha chai
+
+PATH: 
+  /Users/samwellander/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/samwellander/.cargo/bin:/Users/samwellander/.fzf/bin
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  8.9.4
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: connect ECONNREFUSED 104.16.26.35:443
+      at Object._errnoException (util.js:1022:11)
+      at _exceptionWithHostPort (util.js:1044:20)
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1182:14)
+
+npm manifest: 
+  {
+    "name": "bro-chat",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "<samwellander@gmail.com>",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
