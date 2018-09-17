@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import NewMessageBar from './NewMessageBar';
+import PropTypes from 'prop-types';
+import Message from './Message';
 import { connect } from 'react-redux';
 import { _loadMessages } from '../store';
 
@@ -12,14 +13,15 @@ class MessageList extends Component {
     return (
       <div>
         {this.props.messages.map(message => (
-          <p key={message.id}>{message.content}</p>
+          <Message key={message.id} message={message} />
         ))}
         <br></br>
-        <NewMessageBar />
       </div>
     )
   }
 }
+
+
 
 const mapDispatchToProps = dispatch => ({
   loadMessages: () => dispatch(_loadMessages())
@@ -27,6 +29,11 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   ...state
-})
+});
+
+// MessageList.propTypes = {
+//   messages: PropTypes.array.isRequired,
+// }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageList);
