@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NewMessageBar from './NewMessageBar';
 import { connect } from 'react-redux';
 import { _loadMessages } from '../store';
 
@@ -13,6 +14,8 @@ class MessageList extends Component {
         {this.props.messages.map(message => (
           <p key={message.id}>{message.content}</p>
         ))}
+        <br></br>
+        <NewMessageBar />
       </div>
     )
   }

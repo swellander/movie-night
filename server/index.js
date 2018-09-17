@@ -10,6 +10,11 @@ const io = socket(server);
 //pass new io object to the funtion written in ./socket.js
 require('./socket')(io);
 
+app.use((req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+});
+
 //serve static files with middleware
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
