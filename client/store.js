@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import axios from 'axios';
+import socket from './socket';
 
 function logging(store) {
   return function (next) {
@@ -28,7 +29,7 @@ const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 
 //Action creators 
 const loadMessages = messages => ({ type: LOAD_MESSAGES, messages });
-const receiveMessage = message => ({ type: RECEIVE_MESSAGE, message });
+export const receiveMessage = message => ({ type: RECEIVE_MESSAGE, message });
 export const writeMessage = content => ({ type: WRITE_MESSAGE, content });
 
 //thunk creators. they all will be prefixed with and _underscore
@@ -49,6 +50,7 @@ export const _sendMessage = message => dispatch => {
     .then(newMessage => {
       const action = receiveMessage(newMessage);
       dispatch(action);
+      socket.emit('new-message', newMessage);
     })
     .catch(err => {
       console.log('whoops', err);
