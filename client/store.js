@@ -18,17 +18,19 @@ function logging(store) {
 
 const initialState = {
   messages: [],
-  draft: ''
+  draft: '',
+  movies: []
 };
 
 //Action types
 const LOAD_MESSAGES = 'LOAD_MESSAGES';
 const WRITE_MESSAGE = 'WRITE_MESSAGE';
-const SEND_MESSAGE = 'SEND_MESSAGE';
 const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+const LOAD_MOVIES = 'LOAD_MOVIES';
 
 //Action creators 
 const loadMessages = messages => ({ type: LOAD_MESSAGES, messages });
+const loadMovies = movies => ({ type: LOAD_MOVIES, movies });
 export const receiveMessage = message => ({ type: RECEIVE_MESSAGE, message });
 export const writeMessage = content => ({ type: WRITE_MESSAGE, content });
 
@@ -38,6 +40,17 @@ export const _loadMessages = () => dispatch => {
     .then(response => response.data)
     .then(messages => {
       const action = loadMessages(messages);
+      dispatch(action);
+    })
+    .catch(err => {
+      console.log('whoops', err);
+    });
+}
+export const _loadMovies = () => dispatch => {
+  axios.get('/api/movies')
+    .then(response => response.data)
+    .then(movies => {
+      const action = loadMovies(movies);
       dispatch(action);
     })
     .catch(err => {
@@ -66,6 +79,8 @@ const reducer = (state = initialState, action) => {
       return { ...state, draft: action.content }
     case RECEIVE_MESSAGE:
       return { ...state, messages: [...state.messages, action.message], draft: '' }
+    case LOAD_MOVIES:
+      return { ...state, movies: action.movies }
     default:
       return state;
   }

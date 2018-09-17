@@ -1,21 +1,19 @@
 import React, { Fragment } from 'react';
-import MessageList from './MessageList';
 import Nav from './Nav';
+import { Switch, Route } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import NewMessageBar from './NewMessageBar';
+import MovieList from './MovieList';
+import Chat from './Chat';
 
 export default () => {
   return (
     <Fragment>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-          <Nav />
-        </Grid>
-      </Grid>
+      <Nav />
       <CssBaseline />
-      <MessageList />
-      <NewMessageBar />
+      <Switch>
+        <Route path="/" component={MovieList} />
+        <Route chat="/chat" component={Chat} />
+      </Switch>
     </Fragment>
   )
 };
