@@ -6,13 +6,15 @@
   "license": "MIT",
   "scripts": {
     "test": "nodemon node_modules/mocha/bin/mocha",
-    "start": "nodemon server"
+    "start": "webpack -w & nodemon server --ignore client/"
   },
   "dependencies": {
     "chai": "^4.1.2",
     "express": "^4.16.3",
     "mocha": "^5.2.0",
     "pg": "^7.4.3",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
     "sequelize": "^4.38.1",
     "socket.io": "^2.1.1"
   },

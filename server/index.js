@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
@@ -8,6 +9,9 @@ const socket = require('socket.io');
 const io = socket(server);
 //pass new io object to the funtion written in ./socket.js
 require('./socket')(io);
+
+//serve static files with middleware
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 //error handling route
 app.use((req, res, next) => {
