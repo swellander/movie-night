@@ -1,5 +1,8 @@
 import React from 'react';
+import MessageList from './MessageList';
 
-export default () => (
-  <h1>React is up!</h1>
-)
+export default () => {
+  return (
+    <MessageList />
+  )
+};
