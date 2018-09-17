@@ -13,6 +13,9 @@ require('./socket')(io);
 //serve static files with middleware
 app.use(express.static(path.join(__dirname, '..', 'public')))
 
+//body parser for posting new messages
+app.use(express.json());
+
 //router
 app.use('/api', require('./api'))
 

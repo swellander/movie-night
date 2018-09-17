@@ -4,6 +4,8 @@ const conn = new Sequelize(
   'postgres://localhost/brochat'
 )
 
+//TODO: create an Author model (plus seed dsata). Author has many messages, Message belongs to Author
+
 const Message = conn.define('message', {
   content: {
     type: Sequelize.STRING,
@@ -16,6 +18,8 @@ const sync = () => {
 }
 
 module.exports = {
-  Message,
+  models: {
+    Message
+  },
   sync
 }
