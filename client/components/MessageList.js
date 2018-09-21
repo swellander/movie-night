@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Message from './Message';
 import { connect } from 'react-redux';
-import { _loadMessages } from '../store';
+import { _loadMessages } from '../reducers/messages';
 
 class MessageList extends Component {
   scrollToBottom = () => {
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   }
 
-  //auto-scrolling here https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
+  //auto-scrolling came from here https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
 
   componentDidMount() {
     this.props.loadMessages();
@@ -50,9 +50,11 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-const mapStateToProps = state => ({
-  ...state
-});
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages.list
+  }
+};
 
 // MessageList.propTypes = {
 //   messages: PropTypes.array.isRequired,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { _sendMessage, writeMessage } from '../store';
+import { _sendMessage, writeMessage } from '../reducers/messages';
 import TextField from '@material-ui/core/TextField';
 
 class NewMessageBar extends React.Component {
@@ -30,8 +30,8 @@ class NewMessageBar extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  content: state.draft
+const mapStateToProps = ({ messages }) => ({
+  content: messages.draft
 });
 
 const mapDispatchToProps = dispatch => ({
