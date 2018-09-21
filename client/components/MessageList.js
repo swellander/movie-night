@@ -43,8 +43,6 @@ class MessageList extends Component {
 
 
 const mapDispatchToProps = dispatch => {
-  const msgList = document.getElementById('message-list');
-  if (msgList) msgList.scrollTop = msgList.scrollHeight;
   return {
     loadMessages: () => dispatch(_loadMessages())
   }

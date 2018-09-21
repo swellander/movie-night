@@ -23,7 +23,7 @@ export const _loadMovies = () => dispatch => {
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_MOVIES:
-      return { ...state, movies: action.movies }
+      return { ...state, list: action.movies }
     default:
       return state;
   }
