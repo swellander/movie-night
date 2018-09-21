@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Message } = require('../db').models;
+const { Message } = require('../db/models');
 
 router.get('/', (req, res, next) => {
   Message.findAll()

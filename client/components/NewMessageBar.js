@@ -10,8 +10,12 @@ class NewMessageBar extends React.Component {
     sendNewMessage({ content });
   }
   render() {
+    const styles = {
+      position: 'fixed',
+      bottom: 0,
+    }
     return (
-      <div>
+      <div style={styles}>
         <form method="POST" onSubmit={this.handleSubmit}>
           <TextField
             type="text"

@@ -3,18 +3,18 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 import socket from './socket';
 
-function logging(store) {
-  return function (next) {
-    return function (action) {
-      console.group();
-      console.log('state:', store.getState());
-      console.log('action:', action);
-      console.groupEnd();
-      next(action);
-      console.log(store.getState());
-    }
-  }
-}
+// function logging(store) {
+//   return function (next) {
+//     return function (action) {
+//       console.group();
+//       console.log('state:', store.getState());
+//       console.log('action:', action);
+//       console.groupEnd();
+//       next(action);
+//       console.log(store.getState());
+//     }
+//   }
+//} 
 
 const initialState = {
   messages: [],

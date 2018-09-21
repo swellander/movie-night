@@ -11,8 +11,8 @@ export default () => {
       <Nav />
       <CssBaseline />
       <Switch>
-        <Route path="/" component={MovieList} />
-        <Route chat="/chat" component={Chat} />
+        <Route exact path="/" component={MovieList} />
+        <Route path="/chat" component={Chat} />
       </Switch>
     </Fragment>
   )

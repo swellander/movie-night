@@ -15,7 +15,7 @@ const styles = theme => ({
 
 const Message = ({ message, classes }) => {
   return (
-    <div>
+    <div >
       <Paper className={classes.root} elevation={1}>
         <Typography>
           {message.content}

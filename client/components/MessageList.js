@@ -10,8 +10,12 @@ class MessageList extends Component {
   }
 
   render() {
+    const styles = {
+      height: '50vh',
+      marginTop: '70px'
+    }
     return (
-      <div>
+      <div style={styles}>
         {this.props.messages.map(message => (
           <Message key={message.id} message={message} />
         ))}

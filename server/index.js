@@ -1,14 +1,22 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const db = require('./db');
 const port = process.env.PORT || 8080;
-const server = app.listen(port, () => console.log(`listening on port ${port}`));
 
-//socket setup
-const socket = require('socket.io');
-const io = socket(server);
-//pass new io object to the funtion written in ./socket.js
-require('./socket')(io);
+const init = async () => {
+  await db.sync();
+  const server = app.listen(port, () => console.log(`listening on port ${port}`));
+
+  //socket setup
+  const socket = require('socket.io');
+  const io = socket(server);
+  //pass new io object to the funtion written in ./socket.js
+  require('./socket')(io);
+}
+
+init();
+
 
 // app.use((req, res, next) => {
 //   console.log(req.method, req.url);
