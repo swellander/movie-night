@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "test": "nodemon node_modules/mocha/bin/mocha",
-    "start": "webpack -w & nodemon server --ignore client/"
+    "start": "webpack -w & nodemon --ignore client/ --ignore public/ server"
   },
   "dependencies": {
     "@material-ui/core": "^3.1.0",
