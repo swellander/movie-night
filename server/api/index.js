@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const messageRoutes = require('./messages');
 
-router.use('/messages', messageRoutes);
+router.use('/messages', require('./messages'));
+router.use('/movies', require('./movies'));
 
 module.exports = router;
