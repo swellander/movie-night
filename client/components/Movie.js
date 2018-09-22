@@ -1,4 +1,6 @@
 import React from 'react';
+import { _deleteMovie } from '../reducers/movies';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -20,8 +22,8 @@ const styles = {
 };
 
 function Movie(props) {
-  const { movie, classes } = props;
-  const { Title, Poster, Plot } = movie;
+  const { remove, movie, classes } = props;
+  const { Title, Poster, Plot, id } = movie;
   return (
     <Card className={classes.card}>
       <CardActionArea>
@@ -48,6 +50,9 @@ function Movie(props) {
         <Button size="small" color="primary">
           Learn More
         </Button>
+        <Button onClick={() => remove(id)} size="small" color="secondary">
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );
@@ -57,4 +62,10 @@ Movie.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Movie);
+const mapDispatchToProps = dispatch => {
+  return {
+    remove: id => dispatch(_deleteMovie(id))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Movie));

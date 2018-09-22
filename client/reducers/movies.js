@@ -8,10 +8,12 @@ const initialState = {
 const LOAD_MOVIES = 'LOAD_MOVIES';
 const WRITE_MOVIE = 'WRITE_MOVIE';
 const ADD_MOVIE = 'ADD_MOVIE';
+const DELETE_MOVIE = 'DELETE_MOVIE';
 
 //action creators
 const loadMovies = movies => ({ type: LOAD_MOVIES, movies });
 const addMovie = movie => ({ type: ADD_MOVIE, movie });
+const deleteMovie = id => ({ type: DELETE_MOVIE, id })
 export const writeMovie = draft => ({ type: WRITE_MOVIE, draft });
 
 
@@ -29,12 +31,6 @@ export const _loadMovies = () => dispatch => {
 }
 
 export const _addMovie = movieTitle => dispatch => {
-  //QUESTION: is it best practice to format "movie" inside or outside of this function?
-  // axios.get(`http://www.omdbapi.com/?apikey=${process.env.OMDB_KEY}&t=${movieTitle}`)
-  //   .then(response => response.data)
-  //   .then(movie => console.log(movie))
-  //   .catch(err => console.log(err))
-
   //movie title is used to make api call to movie database from backend
   axios.post('/api/movies', { movieTitle })
     .then(response => response.data)
@@ -49,6 +45,17 @@ export const _addMovie = movieTitle => dispatch => {
     })
 }
 
+export const _deleteMovie = id => dispatch => {
+  axios.delete(`/api/movies/${id}`)
+    .then(() => {
+      const action = deleteMovie(id);
+      dispatch(action);
+    })
+    .catch(err => {
+      throw err;
+    });
+}
+
 const movieReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_MOVIES:
@@ -57,6 +64,8 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, draft: action.draft }
     case ADD_MOVIE:
       return { ...state, list: [...state.list, action.movie] }
+    case DELETE_MOVIE:
+      return { ...state, list: state.list.filter(movie => movie.id !== action.id) }
     default:
       return state;
   }

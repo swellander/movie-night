@@ -2,6 +2,8 @@ const { Movie } = require('../db/models');
 const router = require('express').Router();
 const axios = require('axios');
 
+//TODO: abstract work in routes. thin them up
+
 router.get('/', (req, res, next) => {
   Movie.findAll()
     .then(movies => res.json(movies))
@@ -18,5 +20,17 @@ router.post('/', (req, res, next) => {
     .then(movie => res.json(movie))
     .catch(next);
 });
+
+router.delete('/:id', (req, res, next) => {
+  Movie.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(() => res.sendStatus(202))
+    .catch(next);
+})
+
+
 
 module.exports = router;
