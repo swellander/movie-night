@@ -9,6 +9,8 @@ const initialState = {
 //Action types
 const LOAD_MESSAGES = 'LOAD_MESSAGES';
 const WRITE_MESSAGE = 'WRITE_MESSAGE';
+
+//TODO: change "receive" to "add" so as to be consistent with movies reducer
 const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 
 //Action creators 

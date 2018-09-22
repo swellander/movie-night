@@ -1,44 +1,68 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+//import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { writeMovie } from '../reducers/movies';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { NavLink, Link } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import { _addMovie } from '../reducers/movies';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
+class Nav extends React.Component {
+  handleSubmit = e => {
+    e.preventDefault();
+    const { addMovie, draft } = this.props;
+    addMovie(draft);
+  }
 
-const Nav = ({ classes }) => {
-  return (
-    <div className={classes.root}>
-      <AppBar position="fixed" color="default">
-        <Toolbar>
-          <Typography variant="title" color="inherit">
-            <Link to="/">
-              Movie Night
-            </Link>
-          </Typography>
-          <NavLink to="/chat"><Button color="inherit">Chat</Button></NavLink>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+  render() {
+    const { draft, handleChange } = this.props;
+    return (
+      <div>
+        <AppBar position="fixed" color="default">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              <Link to="/">
+                Movie Night
+              </Link>
+            </Typography>
+            <NavLink to="/chat"><Button color="inherit">Chat</Button></NavLink>
+
+            {/* TODO: make a separate component for form */}
+            <form onSubmit={this.handleSubmit}>
+              <TextField
+                id="standard-search"
+                label="Lookup a movie"
+                value={draft}
+                onChange={e => handleChange(e.target.value)}
+              />
+              <Button type="submit">Add</Button>
+            </form>
+
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
-Nav.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// Nav.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
-export default withStyles(styles)(Nav);
+const mapStateToProps = ({ movies }) => {
+  return {
+    draft: movies.draft
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleChange: draftContent => dispatch(writeMovie(draftContent)),
+    addMovie: title => dispatch(_addMovie(title))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

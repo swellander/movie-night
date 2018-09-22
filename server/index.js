@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const db = require('./db');
 const port = process.env.PORT || 8080;
+require('dotenv').config();
 
 const init = async () => {
   await db.sync();

@@ -1,5 +1,6 @@
 const { Movie } = require('../db/models');
 const router = require('express').Router();
+const axios = require('axios');
 
 router.get('/', (req, res, next) => {
   Movie.findAll()
@@ -8,9 +9,14 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Movie.create(req.body)
+  //QUESTION: where should I put this external api call?
+  axios.get(`http://www.omdbapi.com/?apikey=${process.env.OMDB_KEY}&t=${req.body.movieTitle}`)
+    .then(response => response.data)
+    .then(movie => {
+      return Movie.create(movie)
+    })
     .then(movie => res.json(movie))
     .catch(next);
-})
+});
 
 module.exports = router;
